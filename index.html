@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>송화영 · 교사를 위한 자동화 연수</title>
+<meta name="description" content="19년차 공립 초등교사 송화영. 행정 업무를 학생 관찰과 수업으로 되돌리는 자동화를 직접 만들고, 교사에게 가르칩니다." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B2239;
+    --ink-soft:#1B3A57;
+    --teal:#0E7C7B;
+    --teal-deep:#0A5C5B;
+    --surface:#FBFCFD;
+    --surface-2:#F2F5F7;
+    --slate:#5A6B7A;
+    --hair:#E2E8ED;
+    --max:1080px;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--surface);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--teal);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+  /* eyebrow / mono label — signature */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.04em;
+    color:var(--teal);
+    font-weight:500;
+    display:inline-block;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"// "}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(160%) blur(10px);
+    background:rgba(251,252,253,.82);
+    border-bottom:1px solid var(--hair);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:-.01em}
+  .brand b{color:var(--teal)}
+  .navlinks{display:flex;gap:30px;font-size:.86rem;color:var(--slate)}
+  .navlinks a{transition:color .2s}
+  .navlinks a:hover{color:var(--ink)}
+  @media(max-width:720px){.navlinks{display:none}}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:96px 0 88px;border-bottom:1px solid var(--hair);position:relative;overflow:hidden}
+  .hero-tag{font-family:var(--mono);font-size:.74rem;color:var(--teal);letter-spacing:.02em;margin-bottom:30px}
+  .thesis{
+    font-size:clamp(2rem,6.2vw,4rem);
+    font-weight:800;
+    line-height:1.18;
+    letter-spacing:-.03em;
+    max-width:16ch;
+  }
+  .thesis .mark{
+    position:relative;white-space:nowrap;
+  }
+  .thesis .mark::after{
+    content:"";position:absolute;left:0;right:0;bottom:.08em;height:.16em;
+    background:var(--teal);opacity:.28;z-index:-1;border-radius:2px;
+  }
+  .hero-sub{
+    margin-top:30px;max-width:46ch;font-size:1.06rem;color:var(--ink-soft);
+  }
+  .hero-id{
+    margin-top:40px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  }
+  .hero-id .name{font-size:1.18rem;font-weight:700;letter-spacing:-.01em}
+  .hero-id .role{font-family:var(--mono);font-size:.78rem;color:var(--slate)}
+  .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:13px 22px;border-radius:8px;font-size:.92rem;font-weight:600;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s;
+  }
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:var(--teal-deep);transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(11,34,57,.5)}
+  .btn-ghost{border:1px solid var(--hair);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+  .arrow{font-family:var(--mono);font-size:.9em}
+
+  /* ---------- STAT STRIP ---------- */
+  .stats{border-bottom:1px solid var(--hair);background:var(--surface-2)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:34px 22px;border-left:1px solid var(--hair)}
+  .stat:first-child{border-left:none;padding-left:0}
+  .stat .num{font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat .num em{color:var(--teal);font-style:normal}
+  .stat .lab{margin-top:9px;font-size:.8rem;color:var(--slate)}
+  @media(max-width:720px){
+    .stats .wrap{grid-template-columns:repeat(2,1fr)}
+    .stat{border-top:1px solid var(--hair)}
+    .stat:nth-child(odd){border-left:none;padding-left:0}
+    .stat:nth-child(-n+2){border-top:none}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:88px 0;border-bottom:1px solid var(--hair)}
+  .sec-head{max-width:60ch;margin-bottom:46px}
+  .sec-title{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:800;letter-spacing:-.025em;line-height:1.25}
+  .sec-lead{margin-top:16px;color:var(--ink-soft);font-size:1.02rem;max-width:54ch}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px}
+  .about-grid p{color:var(--ink-soft);margin-bottom:18px}
+  .about-grid p strong{color:var(--ink);font-weight:700}
+  .flow{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--hair);padding-left:0}
+  .flow-step{padding:16px 0 16px 24px;position:relative}
+  .flow-step::before{
+    content:"";position:absolute;left:-6px;top:24px;width:10px;height:10px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--slate);
+  }
+  .flow-step.now::before{border-color:var(--teal);background:var(--teal)}
+  .flow-step .fk{font-family:var(--mono);font-size:.72rem;color:var(--teal);margin-bottom:4px}
+  .flow-step .ft{font-weight:700;font-size:1rem}
+  .flow-step .fd{font-size:.88rem;color:var(--slate);margin-top:2px}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:38px}}
+
+  /* teach cards */
+  .teach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .tcard{
+    border:1px solid var(--hair);border-radius:12px;padding:26px;background:#fff;
+    transition:border-color .2s, transform .2s;
+  }
+  .tcard:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .tcard .tnum{font-family:var(--mono);font-size:.74rem;color:var(--teal);margin-bottom:14px}
+  .tcard h3{font-size:1.06rem;font-weight:700;letter-spacing:-.01em}
+  .tcard p{margin-top:8px;font-size:.9rem;color:var(--slate);line-height:1.55}
+  @media(max-width:720px){.teach-grid{grid-template-columns:1fr}}
+
+  /* work list */
+  .work{display:flex;flex-direction:column;gap:0}
+  .wrow{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;
+    padding:24px 0;border-top:1px solid var(--hair);
+  }
+  .wrow:first-child{border-top:none}
+  .wname{font-weight:700;font-size:1.08rem;letter-spacing:-.01em;min-width:148px}
+  .wname .wrepo{display:block;font-family:var(--mono);font-size:.7rem;color:var(--slate);font-weight:400;margin-top:3px}
+  .wdesc{color:var(--ink-soft);font-size:.94rem}
+  .wstate{
+    font-family:var(--mono);font-size:.68rem;padding:5px 11px;border-radius:999px;
+    white-space:nowrap;letter-spacing:.02em;
+  }
+  .s-run{background:rgba(14,124,123,.12);color:var(--teal-deep)}
+  .s-build{background:rgba(27,58,87,.09);color:var(--ink-soft)}
+  @media(max-width:720px){
+    .wrow{grid-template-columns:1fr auto;gap:6px 14px}
+    .wname{grid-column:1;min-width:0}
+    .wstate{grid-column:2;grid-row:1;justify-self:end}
+    .wdesc{grid-column:1/-1}
+  }
+
+  /* vision */
+  .vision{background:var(--ink);color:#E8EEF2;border-bottom:none}
+  .vision .eyebrow{color:#5FD0CE}
+  .vision .sec-title{color:#fff}
+  .vision-quote{
+    font-size:clamp(1.4rem,3.6vw,2.1rem);font-weight:700;letter-spacing:-.02em;line-height:1.4;
+    max-width:24ch;margin:8px 0 50px;
+  }
+  .vision-quote .hl{color:#5FD0CE}
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .rstep{padding:28px 26px 28px 0;border-left:1px solid rgba(255,255,255,.14);padding-left:26px}
+  .rstep:first-child{border-left:none;padding-left:0}
+  .rstep .rk{font-family:var(--mono);font-size:.72rem;color:#5FD0CE;margin-bottom:10px}
+  .rstep .rt{font-weight:700;font-size:1.05rem;color:#fff}
+  .rstep .rd{font-size:.86rem;color:#9DB2C2;margin-top:7px}
+  @media(max-width:720px){
+    .road{grid-template-columns:1fr}
+    .rstep{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,.14);padding-top:22px}
+    .rstep:first-child{border-top:none;padding-top:0}
+  }
+
+  /* contact */
+  .contact{text-align:center;padding:96px 0}
+  .contact .big{font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.25;max-width:20ch;margin:0 auto}
+  .contact .sub{margin-top:18px;color:var(--ink-soft)}
+  .clinks{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0;background:var(--surface-2)}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  footer span{font-family:var(--mono);font-size:.74rem;color:var(--slate)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    .btn:hover,.tcard:hover,.btn-primary:hover,.btn-ghost:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">송화영<b>.dev</b></div>
+    <div class="navlinks">
+      <a href="#about">소개</a>
+      <a href="#teach">연수</a>
+      <a href="#work">작업</a>
+      <a href="#vision">비전</a>
+      <a href="#contact">문의</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-tag reveal">teacher × vibe coding × 연수강사</div>
+    <h1 class="thesis reveal">교사의 시간은<br><span class="mark">학생에게</span> 쓰여야 합니다.</h1>
+    <p class="hero-sub reveal">반복되는 행정 업무를 AI와 코드로 자동화해, 그 시간을 학생 관찰과 수업으로 되돌립니다. 제가 직접 만들어 쓰고, 교사에게 그 방법을 가르칩니다.</p>
+    <div class="hero-id reveal">
+      <span class="name">송화영 (Shway Song)</span>
+      <span class="role">19년차 공립 초등교사 · 5학년 담임 / 학년부장 / 인성부장</span>
+    </div>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="#teach">연수 살펴보기 <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="#work">만든 것 보기</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat reveal"><div class="num"><em>19</em>년</div><div class="lab">공립 초등교사 경력</div></div>
+    <div class="stat reveal"><div class="num"><em>3</em></div><div class="lab">동시 수행 보직 (담임·학년부장·인성부장)</div></div>
+    <div class="stat reveal"><div class="num"><em>10</em>+</div><div class="lab">운영·개발 중인 저장소</div></div>
+    <div class="stat reveal"><div class="num">지식샘터</div><div class="lab">교사 대상 자동화 연수 출강</div></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">about</span>
+      <h2 class="sec-title">현장에서 굴러가는 자동화를 만드는 교사</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>거창한 이론보다 <strong>당장 학교에서 쓰이는 실용성</strong>을 우선합니다. 하나의 도구만 고집하지 않고 여러 도구를 엮어 실제 업무 흐름을 설계하며, 화려함보다 현장에서도 유지할 수 있는 단순함을 택합니다.</p>
+        <p>모든 작업의 기준은 하나입니다. <strong>"이게 학생에게 돌아갈 시간을 만들어 주는가."</strong> 자동화가 목적이 되지 않도록, 행정·잡무와 학생·학부모 개인정보 보호를 설계 1순위에 둡니다.</p>
+        <p>단발 스크립트를 만들던 단계를 지나, 지금은 흩어진 기능을 통합 플랫폼으로 묶고 있습니다. 나아가 <strong>업무를 입력하면 프로그램이 스스로 만들어지는</strong> 메타 단계를 실험하고 있습니다.</p>
+      </div>
+      <div class="flow reveal">
+        <div class="flow-step"><div class="fk">step.01</div><div class="ft">단발 자동화</div><div class="fd">개별 업무를 하나씩 스크립트로</div></div>
+        <div class="flow-step now"><div class="fk">step.02 · now</div><div class="ft">통합 허브</div><div class="fd">담임·부장 업무를 플랫폼으로 수렴</div></div>
+        <div class="flow-step"><div class="fk">step.03</div><div class="ft">메타 하네스</div><div class="fd">요구 → PRD → 코드 → 배포 자동 생성</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">what i teach</span>
+      <h2 class="sec-title">교사에게 가르치는 것</h2>
+      <p class="sec-lead">코딩을 처음 접하는 교사도 따라올 수 있게, 기획·아이디어를 자동화하는 도구로 바꾸는 과정을 단계별로 다룹니다.</p>
+    </div>
+    <div class="teach-grid">
+      <div class="tcard reveal">
+        <div class="tnum">01</div>
+        <h3>바이브 코딩 입문</h3>
+        <p>아이디어를 실제 작동하는 앱·웹으로. 코드를 외우지 않고 AI와 함께 빠르게 만들어 내는 흐름을 익힙니다.</p>
+      </div>
+      <div class="tcard reveal">
+        <div class="tnum">02</div>
+        <h3>업무 자동화</h3>
+        <p>폴더 정리, PPT 제작, 작년 문서를 참조한 올해 문서 자동 작성 등 반복 업무를 줄이는 실전 자동화.</p>
+      </div>
+      <div class="tcard reveal">
+        <div class="tnum">03</div>
+        <h3>NotebookLM · Claude Cowork</h3>
+        <p>소스 한 벌로 슬라이드·자료를 만들고, 교사 업무를 AI 에이전트에 맡기는 콘텐츠 자동화 워크플로.</p>
+      </div>
+      <div class="tcard reveal">
+        <div class="tnum">04</div>
+        <h3>문서 자동화 (HWP · LaTeX)</h3>
+        <p>HWP/HWPX 구조를 다뤄 공문·기안을 자동 갱신하고, LaTeX로 정교한 학습지를 프로그램 방식으로 생성합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">selected work</span>
+      <h2 class="sec-title">만들어 굴리는 것들</h2>
+      <p class="sec-lead">구상이 아니라 실제로 배포·운영 중이거나 개발 단계에 있는 작업입니다.</p>
+    </div>
+    <div class="work">
+      <div class="wrow reveal">
+        <div class="wname">딸깍 클래스<span class="wrepo">class-all</span></div>
+        <div class="wdesc">시드(교실 경제) 기반 초등 담임 업무 통합 플랫폼. 흩어진 학급 기능을 하나의 허브로 모읍니다.</div>
+        <div class="wstate s-build">building</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname">짬짬이 교실<span class="wrepo">jjam · jjamjjami-gyosil</span></div>
+        <div class="wdesc">전자칠판용 자투리 미니게임 모음. 오프라인 PWA와 대화면 UI로 교실에서 바로 활용. GitHub Pages 배포·운영 중.</div>
+        <div class="wstate s-run">running</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname">무안 전월세 봇<span class="wrepo">muanwolse</span></div>
+        <div class="wdesc">매물을 크롤링해 하루 1통 텔레그램 리포트로. 중복·낚시 가드와 실패 경고까지 갖춘 "굴러가는 시스템".</div>
+        <div class="wstate s-run">running</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname">한능검 데이터<span class="wrepo">koreanexam</span></div>
+        <div class="wdesc">650문항을 vision 파이프라인으로 분할·추출·재태깅. 정답을 문서로 고정해 품질을 관리.</div>
+        <div class="wstate s-build">building</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname">서식 채우기 플러그인<span class="wrepo">hwpx-form-filler-plugin</span></div>
+        <div class="wdesc">작년 HWPX 공문을 서식으로 삼아 올해 초안을 자동 생성하는 Claude Code 플러그인.</div>
+        <div class="wstate s-build">building</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vision" class="vision">
+  <div class="wrap">
+    <span class="eyebrow">where this goes</span>
+    <p class="vision-quote">교사의 업무를 입력하면, <span class="hl">그에 맞는 프로그램이 스스로 만들어지는</span> 시스템으로.</p>
+    <div class="road">
+      <div class="rstep reveal"><div class="rk">~2026 · 통합</div><div class="rt">단발 앱을 허브로</div><div class="rd">흩어진 도구를 딸깍 클래스로 수렴하고 자동화 패턴을 템플릿화.</div></div>
+      <div class="rstep reveal"><div class="rk">2027–28 · 자산화</div><div class="rt">스킬·플러그인 라이브러리</div><div class="rd">반복 패턴을 자산으로 쌓고, 요구→코드 초안 메타 하네스 MVP 가동.</div></div>
+      <div class="rstep reveal"><div class="rk">2029–30 · 확산</div><div class="rt">전국 교사에게로</div><div class="rd">검증된 도구를 연수·오픈소스로 확산. 나의 자동화가 남의 자동화로 복제될 것.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="text-align:left">get in touch</span>
+    <h2 class="big reveal">교사의 시간을 돌려주는 일,<br>함께 해보실까요.</h2>
+    <p class="sub reveal">연수·강의 문의나 협업 제안을 환영합니다.</p>
+    <div class="clinks reveal">
+      <a class="btn btn-primary" href="mailto:shway81@gmail.com">shway81@gmail.com</a>
+      <a class="btn btn-ghost" href="https://github.com/shway81-droid" target="_blank" rel="noopener">GitHub @shway81-droid <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 송화영 · Shway Song</span>
+    <span>build systems that return teacher time to students</span>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay=(Math.min(i,6)*60)+'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
