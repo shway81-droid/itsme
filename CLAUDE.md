@@ -30,7 +30,13 @@
    - 날짜 오름차순 유지 (페이지가 정렬하긴 하지만 diff 가독성을 위해)
 2. 커밋 메시지: `Log weight YYYY-MM-DD: 73.74kg`
 3. `git push -u origin claude/daily-weight-tracking-trm7fj`
-4. 답장은 짧게, **존댓말로** — 기록 완료 + 전일 대비 / 7일 평균 정도만. 장황한 코칭 금지.
+4. **현황 카드 이미지를 만들어 채팅에 첨부한다** (매번, 빠뜨리지 말 것)
+   ```bash
+   ln -sfn "<스크래치패드>/node_modules" node_modules   # playwright 없으면 스크래치패드에 npm i playwright
+   node tools/shot.js "<스크래치패드>/weight-card.png"
+   ```
+   나온 PNG를 `SendUserFile` 로 보낸다 (`display:"render"`). `weight.html` 상단(제목·지표·그래프)을 그대로 잘라낸 이미지라 페이지와 항상 같은 내용이다.
+5. 답장은 짧게, **존댓말로** — 기록 완료 + 전일 대비 / 7일 평균 정도만. 장황한 코칭 금지.
 
 목표 체중·키는 `config.target` / `config.height` 에 넣으면 목표선과 BMI가 표시된다. 비워두면 해당 항목은 숨는다.
 
