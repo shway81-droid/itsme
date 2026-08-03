@@ -164,6 +164,11 @@
     "unit": "kg"
   },
   "entries": [
+    {"d":"2026-07-26","w":74.82},
+    {"d":"2026-07-27","w":74.87},
+    {"d":"2026-07-28","w":74.55},
+    {"d":"2026-07-29","w":74.47},
+    {"d":"2026-07-30","w":74.53},
     {"d":"2026-08-03","w":73.74}
   ]
 }
@@ -273,8 +278,9 @@
     var x = new Date(t);
     return '<span class="yr">' + x.getFullYear() + '.</span>' + fmtDate(t) + ' (' + WD[x.getDay()] + ')';
   }
-  function n1(v){ return (Math.round(v*10)/10).toFixed(1); }
-  function signed(v){ return (v > 0 ? '+' : v < 0 ? '−' : '±') + n1(Math.abs(v)); }
+  /* 입력 정밀도(소수 둘째 자리)를 그대로 보여준다 */
+  function nw(v){ return v.toFixed(2); }
+  function signed(v){ return (v > 0 ? '+' : v < 0 ? '−' : '±') + nw(Math.abs(v)); }
   function deltaClass(v){ return v < 0 ? 'down' : v > 0 ? 'up' : ''; }
 
   /* 7일(캘린더 기준) 이동평균 — 기록이 빠진 날이 있어도 안전 */
@@ -313,7 +319,7 @@
 
     cards.push(
       '<div class="stat"><div class="lab">최신 체중</div>' +
-      '<div class="num">' + n1(last.w) + '<small> ' + UNIT + '</small></div>' +
+      '<div class="num">' + nw(last.w) + '<small> ' + UNIT + '</small></div>' +
       '<div class="note">' + fmtDateFull(last.t) + ' 측정</div></div>'
     );
 
@@ -323,7 +329,7 @@
       cards.push(
         '<div class="stat"><div class="lab">직전 기록 대비</div>' +
         '<div class="num ' + deltaClass(dPrev) + '">' + signed(dPrev) + '<small> ' + UNIT + '</small></div>' +
-        '<div class="note">' + (gap === 1 ? '어제' : gap + '일 전') + ' ' + n1(prev.w) + ' ' + UNIT + '</div></div>'
+        '<div class="note">' + (gap === 1 ? '어제' : gap + '일 전') + ' ' + nw(prev.w) + ' ' + UNIT + '</div></div>'
       );
     } else {
       cards.push('<div class="stat"><div class="lab">직전 기록 대비</div><div class="num"><small>기록 2일차부터</small></div><div class="note">첫 기록입니다</div></div>');
@@ -331,7 +337,7 @@
 
     cards.push(
       '<div class="stat"><div class="lab">7일 평균</div>' +
-      '<div class="num">' + n1(ma.v) + '<small> ' + UNIT + '</small></div>' +
+      '<div class="num">' + nw(ma.v) + '<small> ' + UNIT + '</small></div>' +
       '<div class="note">최근 7일 중 ' + ma.n + '회 기록</div></div>'
     );
 
@@ -339,16 +345,16 @@
       var toGo = last.w - target;
       cards.push(
         '<div class="stat"><div class="lab">목표까지</div>' +
-        '<div class="num ' + (toGo <= 0 ? 'down' : '') + '">' + (toGo <= 0 ? '달성' : n1(toGo)) + (toGo > 0 ? '<small> ' + UNIT + '</small>' : '') + '</div>' +
-        '<div class="note">목표 ' + n1(target) + ' ' + UNIT +
-        (toGo < 0 ? ' · ' + n1(-toGo) + ' ' + UNIT + ' 아래' : '') + '</div></div>'
+        '<div class="num ' + (toGo <= 0 ? 'down' : '') + '">' + (toGo <= 0 ? '달성' : nw(toGo)) + (toGo > 0 ? '<small> ' + UNIT + '</small>' : '') + '</div>' +
+        '<div class="note">목표 ' + nw(target) + ' ' + UNIT +
+        (toGo < 0 ? ' · ' + nw(-toGo) + ' ' + UNIT + ' 아래' : '') + '</div></div>'
       );
     } else {
       var dStart = last.w - first.w;
       cards.push(
         '<div class="stat"><div class="lab">시작 대비</div>' +
         '<div class="num ' + deltaClass(dStart) + '">' + signed(dStart) + '<small> ' + UNIT + '</small></div>' +
-        '<div class="note">' + fmtDateFull(first.t) + ' ' + n1(first.w) + ' ' + UNIT + '</div></div>'
+        '<div class="note">' + fmtDateFull(first.t) + ' ' + nw(first.w) + ' ' + UNIT + '</div></div>'
       );
     }
     el.innerHTML = cards.join('');
@@ -357,7 +363,7 @@
     bits.push('기록 ' + all.length + '일');
     if (streak(all) > 1) bits.push('연속 ' + streak(all) + '일');
     if (height) bits.push('BMI ' + (last.w / Math.pow(height/100, 2)).toFixed(1));
-    if (target === null && all.length > 1) bits.push('시작 ' + n1(first.w) + ' ' + UNIT);
+    if (target === null && all.length > 1) bits.push('시작 ' + nw(first.w) + ' ' + UNIT);
     document.getElementById('head-sub').textContent =
       '일어나서 잰 숫자 하나를 매일 같은 조건으로 쌓습니다. · ' + bits.join(' · ');
     document.getElementById('foot-note').textContent = 'last update ' + all[all.length-1].d;
@@ -496,7 +502,7 @@
       var prev = idx > 0 ? all[idx-1] : null;
       var d1 = prev ? best.e.w - prev.w : null;
       tip.innerHTML = '<span class="td">' + fmtDateFull(best.e.t) + '</span><br>' +
-        '<b>' + n1(best.e.w) + ' ' + UNIT + '</b>' +
+        '<b>' + nw(best.e.w) + ' ' + UNIT + '</b>' +
         (d1 !== null ? ' <span style="color:' + (d1 < 0 ? '#5FD0CE' : d1 > 0 ? '#F0A29B' : '#9DB2C2') + '">' + signed(d1) + '</span>' : '') +
         (best.e.memo ? '<br><span class="td">' + best.e.memo.replace(/</g,'&lt;') + '</span>' : '');
       var wrapW = svg.getBoundingClientRect().width;
@@ -525,7 +531,7 @@
         '<td class="d">' + fmtRowDate(e.t) + '</td>' +
         '<td class="memo">' + (e.memo ? e.memo.replace(/</g,'&lt;') : '') + '</td>' +
         '<td class="' + (d === null ? '' : deltaClass(d)) + '">' + (d === null ? '—' : signed(d)) + '</td>' +
-        '<td class="w">' + n1(e.w) + '</td>' +
+        '<td class="w">' + nw(e.w) + '</td>' +
       '</tr>';
     }).join('');
     document.getElementById('table-count').textContent =
