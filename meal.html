@@ -107,7 +107,12 @@
     {"d":"2026-08-20","t":"아침","n":"김치찌개, 흰쌀밥","kcal":620,"c":78,"p":26,"f":21}
   d=날짜  t=끼니(아침/점심/저녁/간식)  n=음식  kcal=열량
   c=탄수화물(g)  p=단백질(g)  f=지방(g)   ← 매크로는 없으면 생략 가능
-  사진 분석은 추정치다. 양 추정 오차가 커서 ±20~30% 로 보는 게 맞다.
+
+  남긴 음식이 있으면 kcal·c·p·f 는 "실제 먹은 양"으로 넣고, 아래 둘을 덧붙인다.
+    "served":880, "ate":0.7      ← 차린 양 880kcal 중 70% 섭취
+  다 먹었으면 둘 다 생략한다. 그래프는 언제나 kcal(먹은 양)만 쓴다.
+
+  사진 분석은 추정치다. 양 추정 오차가 커서 ±20~30%, 손이 함께 찍히면 ±15% 안팎이다.
   ────────────────────────────────────────────────────────────
 -->
 <script id="meal-data" type="application/json">
@@ -195,7 +200,11 @@
     .filter(function(e){ return e && e.d && typeof e.kcal === 'number'; })
     .map(function(e){
       return { d:e.d, t:e.t || '', n:e.n || '', kcal:e.kcal,
-               c:e.c||0, p:e.p||0, f:e.f||0, t0:new Date(e.d+'T00:00:00').getTime() };
+               c:e.c||0, p:e.p||0, f:e.f||0,
+               /* served = 차린 양(kcal), ate = 먹은 비율. kcal 은 이미 먹은 양이다 */
+               served:(typeof e.served === 'number' ? e.served : null),
+               ate:(typeof e.ate === 'number' ? e.ate : null),
+               t0:new Date(e.d+'T00:00:00').getTime() };
     })
     .sort(function(a,b){ return a.t0 - b.t0; });
 
@@ -319,10 +328,13 @@
         '<span class="day-sum"><b>' + k(d.kcal) + ' kcal</b>' +
         (mk ? ' · 탄 ' + Math.round(d.c) + ' / 단 ' + Math.round(d.p) + ' / 지 ' + Math.round(d.f) + ' g' : '') + '</span></div>' +
         d.meals.map(function(m){
-          var has = m.c || m.p || m.f;
+          var bits = [];
+          if (m.c || m.p || m.f) bits.push('탄 ' + m.c + ' · 단 ' + m.p + ' · 지 ' + m.f + ' g');
+          if (m.ate !== null && m.ate < 1)
+            bits.push('차린 ' + (m.served !== null ? k(m.served) + ' kcal 중 ' : '') + Math.round(m.ate*100) + '% 섭취');
           return '<div class="meal"><span class="meal-t">' + (m.t||'—') + '</span>' +
             '<span class="meal-n">' + m.n.replace(/</g,'&lt;') +
-            (has ? '<span class="macro">탄 ' + m.c + ' · 단 ' + m.p + ' · 지 ' + m.f + ' g</span>' : '') + '</span>' +
+            (bits.length ? '<span class="macro">' + bits.join(' · ') + '</span>' : '') + '</span>' +
             '<span class="meal-k">' + k(m.kcal) + '</span></div>';
         }).join('') + '</div>';
     }).join('');
