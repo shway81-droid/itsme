@@ -122,6 +122,7 @@
     "goalKcal": null
   },
   "entries": [
+    {"d":"2026-08-26","t":"아침","at":"07:09","n":"삶은 계란 1개 (특란)","kcal":81,"c":0.4,"p":7.2,"f":5.4}
   ]
 }
 </script>
@@ -276,7 +277,8 @@
     for (var t = start; t <= end; t += DAY) slots.push(byT[t] || { t0:t, kcal:0, c:0, p:0, f:0, empty:true });
 
     var top = Math.max.apply(null, slots.map(function(s){ return s.kcal; }).concat(goal ? [goal] : [0]));
-    var step = top > 2500 ? 1000 : 500;
+    /* 값이 작은 날(한 끼만 기록 등)에도 막대가 뭉개지지 않게 눈금을 값에 맞춘다 */
+    var step = top > 2500 ? 1000 : top > 800 ? 500 : top > 300 ? 200 : 100;
     var yMax = Math.max(step, Math.ceil(top*1.12/step)*step);
     var X = function(i){ return P.l + iw*(i+0.5)/slots.length; };
     var Y = function(v){ return P.t + (1 - v/yMax)*ih; };

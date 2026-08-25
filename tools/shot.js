@@ -4,13 +4,14 @@
  * 붙일 현황 이미지를 만드는 용도다.
  *
  *   npm i playwright        (브라우저는 /opt/pw-browsers 에 이미 있음)
- *   node tools/shot.js [출력경로.png]
+ *   node tools/shot.js [출력경로.png] [weight.html|meal.html]
  */
 const path = require('path');
 const { chromium } = require('playwright');
 
 const OUT = process.argv[2] || path.join(process.cwd(), 'weight-card.png');
-const PAGE = 'file://' + path.resolve(__dirname, '..', 'weight.html');
+const SRC = process.argv[3] || 'weight.html';        // weight.html | meal.html
+const PAGE = 'file://' + path.resolve(__dirname, '..', SRC);
 const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const PAD = 26;
 
