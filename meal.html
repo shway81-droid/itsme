@@ -81,6 +81,7 @@
   .day-sum b{color:var(--ink);font-size:.92rem}
   .meal{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:baseline;padding:7px 0}
   .meal-t{font-family:var(--mono);font-size:.72rem;color:var(--teal)}
+  .meal-at{display:block;font-size:.66rem;color:var(--slate);margin-top:1px}
   .meal-n{font-size:.92rem}
   .meal-n .macro{display:block;font-family:var(--mono);font-size:.7rem;color:var(--slate);margin-top:2px}
   .meal-k{font-family:var(--mono);font-size:.9rem;font-weight:700;white-space:nowrap}
@@ -105,7 +106,7 @@
   ── 기록 방법 ────────────────────────────────────────────────
   meal-data 블록의 entries 배열에 끼니마다 한 줄 추가.
     {"d":"2026-08-20","t":"아침","n":"김치찌개, 흰쌀밥","kcal":620,"c":78,"p":26,"f":21}
-  d=날짜  t=끼니(아침/점심/저녁/간식)  n=음식  kcal=열량
+  d=날짜  t=끼니(아침/점심/저녁/간식)  n=음식  kcal=열량  at=촬영시각(HH:MM)
   c=탄수화물(g)  p=단백질(g)  f=지방(g)   ← 매크로는 없으면 생략 가능
 
   남긴 음식이 있으면 kcal·c·p·f 는 "실제 먹은 양"으로 넣고, 아래 둘을 덧붙인다.
@@ -199,7 +200,7 @@
   var all = (raw.entries || [])
     .filter(function(e){ return e && e.d && typeof e.kcal === 'number'; })
     .map(function(e){
-      return { d:e.d, t:e.t || '', n:e.n || '', kcal:e.kcal,
+      return { d:e.d, t:e.t || '', n:e.n || '', kcal:e.kcal, at:e.at || '',
                c:e.c||0, p:e.p||0, f:e.f||0,
                /* served = 차린 양(kcal), ate = 먹은 비율. kcal 은 이미 먹은 양이다 */
                served:(typeof e.served === 'number' ? e.served : null),
@@ -332,7 +333,8 @@
           if (m.c || m.p || m.f) bits.push('탄 ' + m.c + ' · 단 ' + m.p + ' · 지 ' + m.f + ' g');
           if (m.ate !== null && m.ate < 1)
             bits.push('차린 ' + (m.served !== null ? k(m.served) + ' kcal 중 ' : '') + Math.round(m.ate*100) + '% 섭취');
-          return '<div class="meal"><span class="meal-t">' + (m.t||'—') + '</span>' +
+          return '<div class="meal"><span class="meal-t">' + (m.t||'—') +
+            (m.at ? '<span class="meal-at">' + m.at + '</span>' : '') + '</span>' +
             '<span class="meal-n">' + m.n.replace(/</g,'&lt;') +
             (bits.length ? '<span class="macro">' + bits.join(' · ') + '</span>' : '') + '</span>' +
             '<span class="meal-k">' + k(m.kcal) + '</span></div>';
