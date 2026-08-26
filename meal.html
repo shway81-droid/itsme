@@ -241,7 +241,7 @@
     var pct = function(g, per){ return mk ? Math.round(g*per/mk*100) : 0; };
     var cards = [
       '<div class="stat"><div class="lab">최근 기록일 섭취</div><div class="num">' + k(last.kcal) + '<small> kcal</small></div>' +
-      '<div class="note">' + full(last.t0) + ' · ' + last.meals.length + '끼</div></div>',
+      '<div class="note">' + full(last.t0) + ' · ' + last.meals.length + '회</div></div>',
 
       '<div class="stat"><div class="lab">탄 · 단 · 지</div><div class="num" style="font-size:1.5rem">' +
       (mk ? pct(last.c,4) + ' · ' + pct(last.p,4) + ' · ' + pct(last.f,9) + '<small> %</small>' : '<small>미기록</small>') + '</div>' +
@@ -259,7 +259,7 @@
     } else {
       var tot = days.reduce(function(s,d){ return s + d.kcal; }, 0);
       cards.push('<div class="stat"><div class="lab">전체 평균</div><div class="num">' + k(tot/days.length) + '<small> kcal</small></div>' +
-        '<div class="note">' + days.length + '일 · ' + all.length + '끼 기록</div></div>');
+        '<div class="note">' + days.length + '일 · ' + all.length + '회 기록</div></div>');
     }
     document.getElementById('stats').innerHTML = cards.join('');
     document.getElementById('foot-note').textContent = 'last update ' + days[days.length-1].meals[0].d;
