@@ -3,9 +3,10 @@
 송화영 개인 사이트. 정적 HTML만 있고 빌드 도구·의존성은 없다. 파일을 브라우저로 바로 열면 그대로 동작해야 한다.
 
 - `index.html` — 포트폴리오 랜딩 페이지
-- `weight.html` — 매일 아침 체중 기록 (index에서 링크하지 않는 비공개용 페이지, `noindex`)
-- `meal.html` — 음식 사진 분석 결과 기록 (동일하게 비공개·`noindex`)
-- `sleep.html` — 수면 앱 캡처를 읽어 기록 (동일하게 비공개·`noindex`)
+- `health.html` — **체중·식사·수면 기록 통합 페이지** (index에서 링크하지 않는 비공개용, `noindex`)
+  세 기록이 `<script id="health-data">` 한 블록의 `weight` / `meals` / `sleep` 배열에 모여 있고,
+  맨 위 통합 타임라인이 날짜 축을 공유해 세 지표를 위아래로 정렬해 보여준다.
+  (2026-08-27 에 weight.html·meal.html·sleep.html 을 이 한 파일로 합쳤다.)
 
 ## 말투 규칙 (최우선)
 
@@ -21,7 +22,7 @@
 - `72.4`, `오늘 71.8kg` 처럼 소수점·단위를 붙여 주면 그대로 쓴다.
 - 값은 받은 정밀도 그대로 저장한다. 페이지도 소수 **둘째** 자리까지 그대로 표시한다.
 
-1. `weight.html` 상단의 `<script id="weight-data">` JSON 블록 안 `entries` 배열에 한 줄 추가
+1. `health.html` 의 `<script id="health-data">` 안 **`weight` 배열**에 한 줄 추가
    ```json
    {"d":"2026-08-04","w":73.74}
    ```
@@ -30,7 +31,7 @@
    - 사용자가 한마디 덧붙이면(“어제 회식”, “운동함”) `"memo":"…"` 로 같이 기록
    - 같은 날짜가 이미 있으면 새로 추가하지 말고 그 줄을 덮어쓴다
    - 날짜 오름차순 유지 (페이지가 정렬하긴 하지만 diff 가독성을 위해)
-   - **반드시 Edit로 해당 줄만 고친다. `weight.html` 전체를 Write로 다시 쓰지 말 것** —
+   - **반드시 Edit로 해당 줄만 고친다. `health.html` 전체를 Write로 다시 쓰지 말 것** —
      기록이 페이지 안에 들어 있어 전체 재작성은 데이터 유실 위험이 있다.
      정상적인 하루치 커밋은 `2 insertions(+), 1 deletion(-)` 이다(직전 줄에 쉼표가 붙어 -1).
      이보다 크게 바뀌었으면 커밋 전에 `git diff` 로 확인한다.
@@ -39,9 +40,9 @@
 4. **현황 카드 이미지를 만들어 채팅에 첨부한다** (매번, 빠뜨리지 말 것)
    ```bash
    ln -sfn "<스크래치패드>/node_modules" node_modules   # playwright 없으면 스크래치패드에 npm i playwright
-   node tools/shot.js "<스크래치패드>/weight-card.png"
+   node tools/shot.js "<스크래치패드>/health-card.png"
    ```
-   나온 PNG를 `SendUserFile` 로 보낸다 (`display:"render"`). `weight.html` 상단(제목·지표·그래프)을 그대로 잘라낸 이미지라 페이지와 항상 같은 내용이다.
+   나온 PNG를 `SendUserFile` 로 보낸다 (`display:"render"`). `health.html` 상단(제목·지표·통합 타임라인)을 그대로 잘라낸 이미지라 페이지와 항상 같은 내용이다.
 5. 답장은 짧게, **존댓말로** — 기록 완료 + 전일 대비 / 7일 평균 정도만. 장황한 코칭 금지.
 
 목표 체중·키는 `config.target` / `config.height` 에 넣으면 목표선과 BMI가 표시된다. 비워두면 해당 항목은 숨는다.
@@ -179,7 +180,7 @@ mcp__PlayMCP__SchoolMeal-get_school_meal(schoolName="해제남초등학교", mea
 1. 사진을 보고 음식을 식별하고, 위 기준자로 양을 가늠해 열량·탄수화물·단백질·지방을 **추정**한다.
    **단, 학교 급식이면 위 조회를 먼저 한다.**
    남긴 양이 있으면 먼저 반영한 뒤 기록한다.
-2. `meal.html` 의 `<script id="meal-data">` 안 `entries` 에 먹은 것마다 한 줄 추가 (Edit로만, 전체 재작성 금지)
+2. `health.html` 의 **`meals` 배열**에 먹은 것마다 한 줄 추가 (Edit로만, 전체 재작성 금지)
    ```json
    {"d":"2026-08-20","t":"점심","n":"김치찌개, 흰쌀밥","kcal":680,"c":82,"p":28,"f":24}
    ```
@@ -203,6 +204,7 @@ mcp__PlayMCP__SchoolMeal-get_school_meal(schoolName="해제남초등학교", mea
 - **`d` 는 "잠자리에 든 날짜"다.** 앱은 보통 **기상 날짜**로 표시하므로 하루를 빼야 한다.
   예) 앱 화면 "8월 27일 / 21:31 취침 / 06:31 기상" → `"d":"2026-08-26"`
   이렇게 해야 같은 날 식사·체중과 나란히 놓인다. **여기서 하루 틀리기 쉬우니 매번 확인할 것.**
+- `health.html` 의 **`sleep` 배열**에 한 줄 추가한다.
 - `min` 은 앱이 알려준 총 수면 시간(분). 취침~기상보다 짧으면 중간에 깬 것이다.
 - 커밋 메시지: `Log sleep 2026-08-26: 9시간 (21:31~06:31)`
 
@@ -217,3 +219,6 @@ mcp__PlayMCP__SchoolMeal-get_school_meal(schoolName="해제남초등학교", mea
 - 색·타이포는 `index.html`의 `:root` 토큰(ink / teal / slate / hair, Pretendard + JetBrains Mono)을 따른다.
 - 외부 JS 라이브러리를 쓰지 않는다. 차트도 순수 SVG로 직접 그린다.
 - 데이터는 별도 파일로 빼지 말고 HTML 안에 인라인으로 둔다 (`file://` 로 열어도 `fetch` 없이 동작하도록).
+- **기록 입력 UI는 만들지 않는다.** 정적 페이지는 GitHub 에 스스로 못 쓰므로 브라우저에서 입력받으면
+  localStorage 에만 남아 git 기록과 갈라진다. 원본은 언제나 git 하나여야 한다.
+  입력은 사용자가 채팅으로 주고 내가 커밋하는 방식을 유지한다.

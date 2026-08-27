@@ -1,16 +1,16 @@
 /*
- * weight.html 상단(제목 + 지표 + 그래프)을 잘라 PNG 카드로 뽑는 개발용 스크립트.
+ * health.html 상단(제목 + 지표 + 통합 타임라인)을 잘라 PNG 카드로 뽑는 개발용 스크립트.
  * 사이트 자체는 여전히 의존성 0 — 이 파일은 배포물이 아니라 매일 아침 채팅에
  * 붙일 현황 이미지를 만드는 용도다.
  *
  *   npm i playwright        (브라우저는 /opt/pw-browsers 에 이미 있음)
- *   node tools/shot.js [출력경로.png] [weight.html|meal.html]
+ *   node tools/shot.js [출력경로.png] [health.html]
  */
 const path = require('path');
 const { chromium } = require('playwright');
 
 const OUT = process.argv[2] || path.join(process.cwd(), 'weight-card.png');
-const SRC = process.argv[3] || 'weight.html';        // weight.html | meal.html
+const SRC = process.argv[3] || 'health.html';        // 기본은 통합 페이지
 const PAGE = 'file://' + path.resolve(__dirname, '..', SRC);
 const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const PAD = 26;
@@ -31,7 +31,7 @@ const PAD = 26;
   await page.waitForTimeout(700);
 
   const head = await page.locator('header.head').boundingBox();
-  const tail = await page.locator('.chart-card').boundingBox();
+  const tail = await page.locator('.card').first().boundingBox();
   if (!head || !tail) {
     console.error('기록이 없어 카드로 만들 화면이 없습니다.');
     await browser.close();
