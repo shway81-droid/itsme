@@ -260,9 +260,10 @@
         <p class="sec-lead">날짜 축을 공유합니다. 세로로 훑으면 같은 날의 세 기록이 한눈에 들어옵니다.</p>
       </div>
       <div class="ranges" id="ranges">
+        <button class="rbtn on" data-range="7">7일</button>
         <button class="rbtn" data-range="14">14일</button>
         <button class="rbtn" data-range="30">30일</button>
-        <button class="rbtn on" data-range="0">전체</button>
+        <button class="rbtn" data-range="0">전체</button>
       </div>
     </div>
     <div class="card">
@@ -395,7 +396,7 @@
   }
 
   /* ---------- 통합 타임라인 ---------- */
-  var state={range:0};
+  var state={range:7};
   function niceStep(span,ticks){
     var raw=(span||1)/ticks, mag=Math.pow(10,Math.floor(Math.log10(raw))), n=raw/mag;
     return (n<=1?1:n<=2?2:n<=5?5:10)*mag;
