@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>만든 것 전체 · 송화영</title>
+<meta name="description" content="공립 초등교사 송화영이 2025년 10월부터 만들어 쓰고 있는 수업 교구, 교사 업무 도구, 콘텐츠, 연수 과정 전체 목록입니다." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B2239;
+    --ink-soft:#1B3A57;
+    --teal:#0E7C7B;
+    --teal-deep:#0A5C5B;
+    --surface:#FBFCFD;
+    --surface-2:#F2F5F7;
+    --slate:#5A6B7A;
+    --hair:#E2E8ED;
+    --amber:#8A5A00;
+    --max:1080px;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);color:var(--ink);background:var(--surface);
+    line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--teal);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  @media(max-width:520px){.wrap{padding:0 16px}}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--teal);font-weight:500;display:inline-block;margin-bottom:18px}
+  .eyebrow::before{content:"// "}
+  .ico{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px);background:rgba(251,252,253,.86);border-bottom:1px solid var(--hair)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:-.01em}
+  .brand b{color:var(--teal)}
+  .navlinks{display:flex;gap:26px;font-size:.86rem;color:var(--slate)}
+  .navlinks a{transition:color .2s}
+  .navlinks a:hover{color:var(--ink)}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;color:var(--slate)}
+  .back:hover{color:var(--ink)}
+  @media(max-width:820px){.navlinks{display:none}}
+
+  /* header */
+  header.top{padding:72px 0 40px}
+  .title{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.2}
+  .lead{margin-top:18px;max-width:60ch;color:var(--ink-soft);font-size:1.02rem}
+  .asof{margin-top:14px;font-family:var(--mono);font-size:.74rem;color:var(--slate)}
+
+  /* summary strip */
+  .summary{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);background:var(--surface-2)}
+  .summary .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .sum{padding:26px 20px;border-left:1px solid var(--hair)}
+  .sum:first-child{border-left:none;padding-left:0}
+  .sum .num{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .sum .num em{color:var(--teal);font-style:normal}
+  .sum .lab{margin-top:8px;font-size:.8rem;color:var(--slate)}
+  @media(max-width:720px){
+    .summary .wrap{grid-template-columns:repeat(2,1fr)}
+    .sum{border-top:1px solid var(--hair)}
+    .sum:nth-child(odd){border-left:none;padding-left:0}
+    .sum:nth-child(-n+2){border-top:none}
+  }
+
+  /* filters */
+  .filters{position:sticky;top:64px;z-index:40;background:rgba(251,252,253,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+  .filters .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-top:14px;padding-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);
+    background:#fff;border:1px solid var(--hair);border-radius:999px;padding:7px 14px;cursor:pointer;
+    transition:border-color .15s,color .15s,background .15s;
+  }
+  .chip:hover{border-color:var(--teal);color:var(--teal)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .chip .n{font-family:var(--mono);font-size:.72rem;opacity:.7;margin-left:4px}
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;color:var(--ink-soft);cursor:pointer;user-select:none}
+  .toggle input{width:16px;height:16px;accent-color:var(--teal)}
+  .shown{margin-left:auto;font-family:var(--mono);font-size:.74rem;color:var(--slate)}
+  @media(max-width:720px){.shown{margin-left:0;width:100%}.filters{position:static}}
+
+  /* groups */
+  main{padding:20px 0 80px}
+  .group{padding-top:44px}
+  .group[hidden]{display:none}
+  .ghead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .gtitle{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+  .gcount{font-family:var(--mono);font-size:.76rem;color:var(--slate)}
+  .gdesc{color:var(--slate);font-size:.9rem;margin-bottom:22px;max-width:62ch}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+  /* card */
+  .card{
+    display:flex;flex-direction:column;gap:10px;
+    background:#fff;border:1px solid var(--hair);border-radius:12px;padding:20px 20px 18px;
+    transition:border-color .2s, transform .2s;
+  }
+  .card:hover{border-color:#bcd3d3}
+  .card[hidden]{display:none}
+  .ctop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:.66rem;padding:4px 10px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+  .b-run{background:rgba(14,124,123,.12);color:var(--teal-deep)}
+  .b-done{background:rgba(27,58,87,.09);color:var(--ink-soft)}
+  .b-build{background:rgba(196,140,20,.14);color:var(--amber)}
+  .kind{font-family:var(--mono);font-size:.68rem;color:var(--slate)}
+  .cname{font-size:1.04rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+  .crepo{display:block;font-family:var(--mono);font-size:.7rem;color:var(--slate);font-weight:400;margin-top:2px}
+  .cdesc{font-size:.88rem;color:var(--ink-soft);line-height:1.55}
+  .cmeta{font-family:var(--mono);font-size:.72rem;color:var(--teal-deep)}
+  .cact{margin-top:auto;padding-top:12px;border-top:1px solid var(--hair);font-size:.84rem}
+  .cact a{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--teal)}
+  .cact a:hover{color:var(--teal-deep);text-decoration:underline;text-underline-offset:3px}
+  .cact .note{display:inline-flex;align-items:flex-start;gap:7px;color:var(--slate)}
+  .cact .note .ico{margin-top:3px}
+  .empty{padding:40px 0;color:var(--slate)}
+
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:.8rem;color:var(--slate)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  footer{border-top:1px solid var(--hair);padding:30px 0;background:var(--surface-2)}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  footer span{font-family:var(--mono);font-size:.74rem;color:var(--slate)}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./">송화영<b>.dev</b></a>
+    <div class="navlinks">
+      <a href="#class">수업 교구</a>
+      <a href="#work">교사 업무</a>
+      <a href="#content">콘텐츠·출판</a>
+      <a href="#teach">연수·강의</a>
+    </div>
+    <a class="back" href="./"><svg class="ico"><use href="#i-left"/></svg>메인으로</a>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <span class="eyebrow">all projects</span>
+    <h1 class="title">지금까지 만든 것 전체</h1>
+    <p class="lead">2025년 10월부터 만든 것 가운데 지금 쓰고 있거나 완성한 것, 그리고 만들고 있는 것을 모았습니다. 웹으로 열리는 것은 바로 가 볼 수 있고, 파일이나 스킬로 쓰는 것은 무엇인지 설명을 적었습니다.</p>
+    <p class="asof">기준 2026-10-07</p>
+    <div class="legend" aria-label="표시 안내">
+      <span><span class="badge b-run">운영 중</span> 지금 쓰고 있음</span>
+      <span><span class="badge b-done">완료</span> 완성해서 더 고치지 않음</span>
+      <span><span class="badge b-build">만드는 중</span> 아직 만드는 중</span>
+    </div>
+  </div>
+</header>
+
+<div class="summary" id="summary">
+  <div class="wrap">
+    <div class="sum"><div class="num"><em data-sum="total">-</em>개</div><div class="lab">전체 프로젝트</div></div>
+    <div class="sum"><div class="num"><em data-sum="linked">-</em>개</div><div class="lab">바로 열어 볼 수 있는 것</div></div>
+    <div class="sum"><div class="num"><em data-sum="unlinked">-</em>개</div><div class="lab">파일·스킬·루틴으로 쓰는 것</div></div>
+    <div class="sum"><div class="num"><em data-sum="build">-</em>개</div><div class="lab">만드는 중</div></div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="wrap">
+    <div class="chips" role="group" aria-label="분야 고르기" id="chips"></div>
+    <label class="toggle"><input type="checkbox" id="onlyLinked" />바로 열어 볼 수 있는 것만</label>
+    <span class="shown" id="shown" aria-live="polite"></span>
+  </div>
+</div>
+
+<main>
+  <div class="wrap" id="groups">
+    <noscript><p class="empty">목록을 보려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 송화영 · Shway Song</span>
+    <span><a href="./">← shway81-droid.github.io/itsme</a></span>
+  </div>
+</footer>
+
+<!--
+  프로젝트 목록 데이터. 여기만 고치면 카드·개수·필터가 함께 바뀝니다.
+  cat:    class(수업 교구) | work(교사 업무) | content(콘텐츠·출판) | teach(연수·강의)
+  status: run(운영 중) | done(완료) | build(만드는 중)
+  kind:   web(사이트 링크) | repo(저장소 링크) | file(파일로 나옴) | skill(스킬, 링크 없음) | routine(자동 루틴) | limited(접근 제한, 링크 없음)
+  url은 web·repo일 때만 씁니다. note는 링크가 없을 때 무엇으로 나오는지 적습니다.
+-->
+<script type="application/json" id="projects-data">
+[
+  {"cat":"class","name":"짬짬이 모아보기","repo":"jjam-classroom","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-classroom/","desc":"짬짬이 가족 사이트를 한 화면에 모은 첫 화면입니다. 모든 사이트의 원본이 이 저장소 하나에 있고, 고치면 각 사이트로 자동 발행됩니다.","meta":"가족 사이트 8곳 · 자동 발행"},
+  {"cat":"class","name":"짬짬이 게임","repo":"jjam","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam/","desc":"전자칠판에서 바로 하는 자투리 미니게임입니다. 설치·로그인 없이 열리고 오프라인에서도 동작합니다.","meta":"미니게임 105종"},
+  {"cat":"class","name":"짬짬이 퀴즈","repo":"jjam-quiz","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-quiz/","desc":"반 전체가 함께 맞히는 문답형 미니게임입니다. 98종은 컴퓨터와 1:1로 겨루는 '혼자 하기'도 됩니다.","meta":"퀴즈 101종"},
+  {"cat":"class","name":"짬짬이 영상","repo":"jjam-video","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-video/","desc":"남은 시간·학년·주제로 골라 트는 교육 영상 모음과 계기교육 달력입니다. 영상마다 활용 아이디어가 붙어 있습니다.","meta":"영상 504편 · 계기일 50종"},
+  {"cat":"class","name":"짬짬이 이야기","repo":"jjam-story","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-story/","desc":"생각하고 말하기 활동용 이야기입니다. 3·5·7분 모드와 후속 질문, 교사 가이드가 들어 있습니다.","meta":"이야기 100편"},
+  {"cat":"class","name":"짬짬이 낱말","repo":"jjam-word","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-word/","desc":"보기 없이 반 전체가 입으로 외치는 말놀이입니다. 초성·속담·사자성어·수수께끼·인물 퀴즈 등 13유형입니다.","meta":"1,944문항"},
+  {"cat":"class","name":"짬짬이 1분사회","repo":"jjam-1min","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-1min/","desc":"사회 교과 차시를 1분 세로 영상으로 정리해 진도 순서대로 찾아 틀 수 있게 했습니다.","meta":"4~6학년 2학기 284차시"},
+  {"cat":"class","name":"짬짬이 그리기","repo":"jjam-draw","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-draw/","desc":"화면이 한 획씩 보여 주면 학생은 종이에 따라 그립니다. 교사 멘트를 AI 음성으로 읽어 줍니다.","meta":"그림 90개"},
+  {"cat":"class","name":"짬짬이 쉼","repo":"jjam-rest","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-rest/","desc":"체육·점심 뒤 1~5분, 호흡·소리·상상으로 들뜬 반을 차분하게 만드는 자동 진행 활동입니다.","meta":"16편 · 두 목소리"},
+  {"cat":"class","name":"짬짬이 스트레칭","repo":"jjam-stretch","status":"run","kind":"web","url":"https://shway81-droid.github.io/jjam-stretch/","desc":"교실 자투리 시간에 하는 스트레칭을 동작 그림과 자동 카운트로 진행합니다.","meta":"100동작 · 상황별 세트 8종"},
+  {"cat":"class","name":"짬짬이 교실 (원작)","repo":"jjamjjami-gyosil","status":"done","kind":"web","url":"https://shway81-droid.github.io/jjamjjami-gyosil/","desc":"2~4명이 동시에 겨루는 터치 미니게임 모음입니다. 지금의 짬짬이 게임이 여기서 시작됐습니다.","meta":"미니게임 60종 · MIT"},
+  {"cat":"class","name":"lesson-kit","repo":"lesson-kit","status":"run","kind":"repo","url":"https://github.com/shway81-droid/lesson-kit","desc":"교과서 한 차시를 넣으면 동기유발 영상·수업 슬라이드·형성평가·개념정리를 만드는 Claude Code 스킬입니다. 교과서와 내용이 같은지는 사람과 코드가 확인합니다.","meta":"Claude Code 스킬 · MIT"},
+  {"cat":"class","name":"1분 수업 영상 스킬","repo":"jjam-1min-skill","status":"run","kind":"repo","url":"https://github.com/shway81-droid/jjam-1min-skill","desc":"차시 자료로 1분 세로 영상을 만들고, 검수·유튜브 공개·사이트 등록까지 이어 주는 AI 브라우저(Aside)용 스킬입니다.","meta":"Aside 스킬 · MIT"},
+  {"cat":"class","name":"교과서 차시 분할","repo":"textbook-splitter","status":"done","kind":"skill","desc":"교과서 한 권짜리 PDF를 차시별 PDF로 나눕니다. 차시 수업 자료를 만드는 첫 단계로 씁니다.","note":"Cowork 스킬 · 결과는 차시별 PDF"},
+  {"cat":"class","name":"5학년 사회 차시 수업 자료","status":"done","kind":"file","desc":"1학기 「법과 인권」 9차시와 2학기 1단원 16차시의 동기유발 영상·수업 슬라이드·형성평가·개념정리입니다. 본인 수업에 썼습니다.","note":"파일로 나옴 · PDF·PPTX·영상 (교과서 저작물이라 비공개)"},
+  {"cat":"class","name":"글씨 학습지","status":"done","kind":"file","desc":"따라 쓰기 학습지를 만들고 휴대폰 카메라로 채점합니다. 인쇄 한 쪽에 맞춰 나옵니다.","note":"로컬 도구 · 인쇄용 학습지"},
+
+  {"cat":"work","name":"기록쌤","repo":"girok","status":"run","kind":"limited","desc":"번호와 칩으로 10초 만에 적은 메모를 객관적인 누가기록으로 바꾸는 학생 행동기록 웹앱입니다. 교사 커뮤니티 코칭 사례 3,010건을 바탕으로 상담자료·민원 대응·생활지도를 돕습니다.","meta":"웹앱 · 기기 간 암호화 동기화","note":"초대코드로 소규모 배포 · 요청 시 안내"},
+  {"cat":"work","name":"우리 반 미션 앱","repo":"class-mission-app","status":"run","kind":"limited","desc":"학생이 과제 사진을 내고 교사가 확인·반려하는 듀오링고 방식 학급 앱입니다. 보상 젬과 수업일 기준 연속 기록이 있습니다.","meta":"웹앱(PWA)","note":"본인 학급 전용"},
+  {"cat":"work","name":"업무 길잡이","repo":"upmu-pahak","status":"run","kind":"repo","url":"https://github.com/shway81-droid/upmu-pahak","desc":"에듀파인에서 받은 1년치 기안 공문과 업무분장표로, 업무별 1년 흐름과 핵심 문서를 HTML 한 장에 정리하는 Claude 스킬입니다.","meta":"Claude 스킬 · MIT"},
+  {"cat":"work","name":"에듀파인 생산문서 일괄 저장","repo":"aside-skills","status":"run","kind":"skill","desc":"에듀파인 문서등록대장의 생산문서 PDF를 기안자·월별로 한 번에 내려받아 업무 부서 폴더로 정리합니다.","note":"AI 브라우저(Aside) 스킬 · 결과는 PDF 폴더"},
+  {"cat":"work","name":"HWPX 서식 채우기","repo":"hwpx-form-filler","status":"run","kind":"skill","desc":"작년 HWPX 공문을 서식으로 삼아 연도·일정·내용만 바꾼 올해 초안을 만듭니다. 쪽수가 바뀌지 않게 막는 장치가 있습니다.","note":"Cowork 스킬·Claude Code 플러그인 · 결과는 HWPX 문서"},
+  {"cat":"work","name":"공문 초안 스킬","repo":"gongmun-choan","status":"run","kind":"skill","desc":"12개월치 공문 폴더를 바탕으로 다음 해 공문과 계획서 초안을 씁니다.","note":"Cowork 스킬 · 결과는 HWPX 문서"},
+  {"cat":"work","name":"학교 행정 문서 AI 초안","status":"done","kind":"file","desc":"학교규칙 개정, 평가계획, 기초학력, 안전·인성, 예산 등 2026학년도 학교 문서를 작년 양식에 맞춰 초안을 쓰고 검토한 결과물입니다.","meta":"150여 건","note":"파일로 나옴 · HWPX·PDF"},
+  {"cat":"work","name":"체험학습 사진 안내 페이지","repo":"chehum-photo-pipeline","status":"done","kind":"skill","desc":"정리 안 된 행사 사진에서 연사·중복을 추리고 학생이 고르게 나오도록 골라, 사진을 담은 학부모 안내 페이지를 만듭니다.","note":"Cowork 스킬 · 결과는 HTML 파일 한 장"},
+  {"cat":"work","name":"학급비 정산","status":"done","kind":"file","desc":"영수증 사진을 읽어 항목별 표와 합계로 정리한 정산 자료를 만듭니다.","note":"파일로 나옴 · 정산표"},
+  {"cat":"work","name":"학교 아침 브리핑","status":"run","kind":"routine","desc":"매일 아침 날씨·미세먼지·급식·학교 일정을 정리해 카카오톡으로 받습니다.","note":"Claude 예약 루틴 · 매일 07:00"},
+  {"cat":"work","name":"나이스 근무상황 알림","status":"run","kind":"routine","desc":"나이스 일일 근무상황을 정리해 카카오톡으로 받습니다.","note":"Cowork 예약 작업 · 평일"},
+  {"cat":"work","name":"협력수업 시간표 알림","status":"run","kind":"routine","desc":"구글 시트의 협력수업 시간표를 읽어 협력 강사에게 일정을 알립니다.","note":"Cowork 예약 작업"},
+  {"cat":"work","name":"교육청 업무지침 노트북","repo":"jne-notebooklm-sync","status":"done","kind":"file","desc":"교육청 업무지침 117개 글과 첨부 169개를 NotebookLM 노트북으로 옮겨, 지침을 물어서 찾을 수 있게 했습니다.","note":"로컬 도구 · 결과는 NotebookLM 노트북"},
+
+  {"cat":"content","name":"우선순위 한국사 학습 웹앱","repo":"koreanexam","status":"run","kind":"limited","desc":"한국사능력검정시험 기출 키워드로 공부하는 웹앱입니다. 암기 카드, 모의고사 자동 채점, 약점 분석이 있습니다.","meta":"승인 교사 약 78명 사용","note":"승인제 · 요청 시 안내"},
+  {"cat":"content","name":"우선순위 한국사 교재","status":"done","kind":"file","desc":"한능검 기출을 지문·정답·오답 키워드로 전부 태깅하고, 문제별·시대별·빈도별로 엮은 교재입니다.","meta":"기본 700 · 심화 1,150문항","note":"파일로 나옴 · PDF 6종"},
+  {"cat":"content","name":"한국사 시대별 강의자료","status":"done","kind":"file","desc":"시대별 교사 강의안·학생 유인물·슬라이드 묶음입니다.","meta":"8세트","note":"파일로 나옴 · 문서·슬라이드"},
+  {"cat":"content","name":"역사 인물 100명과 선사시대 키워드","status":"build","kind":"file","desc":"초등 고학년이 한능검을 준비하도록 인물 카드·기출 해설·퀴즈·모의고사를 묶은 전자책입니다. 마감 대신 품질 기준으로 다듬고 있습니다.","meta":"A4 272쪽","note":"파일로 나옴 · 전자책 PDF"},
+  {"cat":"content","name":"『우선순위 한국사』 출판 기획","status":"done","kind":"file","desc":"기출 데이터 분석을 바탕으로 쓴 출판 기획서와 샘플 원고입니다. 출판사에 투고했습니다.","note":"파일로 나옴 · 기획서·샘플 원고"},
+  {"cat":"content","name":"빈출 키워드 교과서 수록 분석","status":"done","kind":"file","desc":"한능검 빈출 키워드가 초등 사회 교과서 어디에 실렸는지 대조한 분석표입니다.","note":"파일로 나옴 · 엑셀"},
+  {"cat":"content","name":"오늘의 우리말","repo":"ourword","status":"run","kind":"routine","desc":"직접 정리한 어원 492항목을 매일 아침 한 편씩 메일로 보내고, 같은 원고로 카드뉴스 이미지도 만듭니다.","meta":"어원 492항목","note":"Claude 예약 루틴 · 매일 07:00 메일"},
+  {"cat":"content","name":"「투자를 합시다」 슬라이드","status":"done","kind":"file","desc":"교사 커뮤니티에 연재한 투자 원고 5편을 슬라이드로 만들고, 1편은 강의 덱으로 다시 만들었습니다.","meta":"슬라이드 66장 · 강의 덱 15장","note":"파일로 나옴 · PDF·PPTX"},
+
+  {"cat":"teach","name":"lecture-deck","repo":"lecture-deck","status":"run","kind":"repo","url":"https://github.com/shway81-droid/lecture-deck","desc":"주제 하나로 강의 덱·강사 대본·인터넷 없이 여는 배포본·편집 가능한 PPTX·NotebookLM 슬라이드까지 만드는 Claude/Codex 스킬입니다. 실제 강의 예시 3건이 함께 있습니다.","meta":"공개 스킬"},
+  {"cat":"teach","name":"생활 자동화 5일 과정","status":"done","kind":"web","url":"https://shway81-droid.github.io/claude-day1/","desc":"Claude로 사진 앨범·정산·뉴스봇·가계부 같은 생활 자동화 15가지를 5일 동안 직접 만들어 보는 일반인 과정입니다. 1일차 따라 하기 안내 페이지를 공개했습니다.","meta":"15덱 310장 · 강사용·수강생용 배포본","linkLabel":"1일차 안내 페이지"},
+  {"cat":"teach","name":"교사 AI 활용 커리큘럼 L1~L6","status":"build","kind":"file","desc":"설치할 것을 한 단계에 하나씩만 늘리는 교사용 6단계 과정입니다. L1~L4 강의 덱(체험학습 한 사이클·NotebookLM 실전 포함)이 있고 L5·L6을 만들고 있습니다.","meta":"강의 덱 4개","note":"파일로 나옴 · 강의 덱·PPTX"},
+  {"cat":"teach","name":"학부모 생활 자동화 P1~P5","status":"done","kind":"file","desc":"설치 없이 ChatGPT로 여행 준비·가계부·사진 정리·안내문 요약 등 학부모 본인의 생활을 편하게 만드는 5일 과정입니다.","meta":"5덱 251장","note":"파일로 나옴 · 강의 덱"},
+  {"cat":"teach","name":"클로드 코워크 과정","status":"done","kind":"file","desc":"처음 쓰는 성인이 Claude Cowork로 파일 정리·문서 작성·예약 작업을 해 보는 3시간 과정과 심화 2일 과정입니다.","meta":"3시간 55장 · 심화 6덱","note":"파일로 나옴 · 강의 덱·배포본"},
+  {"cat":"teach","name":"Claude Code 바이브 코딩 2일","status":"done","kind":"file","desc":"코드를 처음 쓰는 사람이 Claude Code로 웹 도구를 만들어 보는 2일 과정입니다.","meta":"6덱","note":"파일로 나옴 · 강의 덱·배포본"},
+  {"cat":"teach","name":"「컴맹 탈출」 연수 키트","status":"done","kind":"file","desc":"교사 원격 연수 「클로드 코워크로 수업·업무 자동화」에 쓴 슬라이드·워크북·프롬프트 카드·강사 큐시트입니다.","meta":"슬라이드 37장","note":"파일로 나옴 · 슬라이드·워크북"},
+  {"cat":"teach","name":"「LLM의 원리와 AI 코딩 도구의 흐름」","status":"done","kind":"file","desc":"교사 연수에서 쓰는, 언어 모델이 작동하는 방식과 AI 코딩 도구의 변화를 정리한 원고입니다.","meta":"원고 약 9천 자","note":"파일로 나옴 · 문서"},
+  {"cat":"teach","name":"강의 덱 공장","repo":"lecture-factory","status":"build","kind":"file","desc":"lecture-deck 스킬로 교사·학부모·일반인 강의를 만드는 작업 공간입니다. 취재부터 배포까지 단계를 나눠 AI 에이전트와 함께 만듭니다.","meta":"강의 덱 49개","note":"비공개 작업 공간 · 결과는 강의 덱"}
+]
+</script>
+
+<script>
+(function(){
+  var CATS=[
+    {id:"class",  name:"수업 교구",   desc:"전자칠판과 교실에서 바로 쓰는 활동, 그리고 차시 수업 자료를 만드는 도구입니다."},
+    {id:"work",   name:"교사 업무",   desc:"기록·공문·행정 문서·알림처럼 담임과 부장 업무를 덜어 주는 도구입니다."},
+    {id:"content",name:"콘텐츠·출판", desc:"데이터를 직접 분석해 만든 교재·전자책·연재물입니다."},
+    {id:"teach",  name:"연수·강의",   desc:"교사·학부모·일반인 대상 강의 과정과 강의를 만드는 도구입니다."}
+  ];
+  var STATUS={run:["운영 중","b-run"],done:["완료","b-done"],build:["만드는 중","b-build"]};
+  var KIND={web:"웹",repo:"공개 저장소",file:"파일",skill:"스킬",routine:"자동 루틴",limited:"접근 제한"};
+  var data=JSON.parse(document.getElementById("projects-data").textContent);
+  var linked=function(p){return (p.kind==="web"||p.kind==="repo")&&!!p.url;};
+
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+  function icon(id){
+    var ns="http://www.w3.org/2000/svg";
+    var s=document.createElementNS(ns,"svg");s.setAttribute("class","ico");s.setAttribute("aria-hidden","true");
+    var u=document.createElementNS(ns,"use");u.setAttribute("href","#"+id);s.appendChild(u);return s;
+  }
+
+  function card(p){
+    var c=el("article","card");
+    c.dataset.cat=p.cat;c.dataset.linked=linked(p)?"1":"0";
+    var top=el("div","ctop");
+    var st=STATUS[p.status]||STATUS.done;
+    top.appendChild(el("span","badge "+st[1],st[0]));
+    top.appendChild(el("span","kind",KIND[p.kind]||""));
+    c.appendChild(top);
+    var h=el("h3","cname",p.name);
+    if(p.repo){h.appendChild(el("span","crepo",p.repo));}
+    c.appendChild(h);
+    c.appendChild(el("p","cdesc",p.desc));
+    if(p.meta)c.appendChild(el("div","cmeta",p.meta));
+    var act=el("div","cact");
+    if(linked(p)){
+      var a=el("a");a.href=p.url;a.target="_blank";a.rel="noopener";
+      a.appendChild(document.createTextNode(p.linkLabel||(p.kind==="repo"?"GitHub 저장소":"사이트 열기")));
+      a.appendChild(icon("i-ext"));
+      act.appendChild(a);
+    }else{
+      var n=el("span","note");
+      n.appendChild(icon(p.kind==="limited"?"i-lock":(p.kind==="routine"?"i-clock":"i-file")));
+      n.appendChild(el("span",null,p.note||"파일로 나옴"));
+      act.appendChild(n);
+    }
+    c.appendChild(act);
+    return c;
+  }
+
+  var root=document.getElementById("groups");
+  CATS.forEach(function(cat){
+    var items=data.filter(function(p){return p.cat===cat.id;});
+    var sec=el("section","group");sec.id=cat.id;sec.dataset.cat=cat.id;
+    var head=el("div","ghead");
+    head.appendChild(el("h2","gtitle",cat.name));
+    var cnt=el("span","gcount");cnt.dataset.total=items.length;head.appendChild(cnt);
+    sec.appendChild(head);
+    sec.appendChild(el("p","gdesc",cat.desc));
+    var grid=el("div","grid");
+    items.forEach(function(p){grid.appendChild(card(p));});
+    sec.appendChild(grid);
+    root.appendChild(sec);
+  });
+
+  function setSum(k,v){var e=document.querySelector('[data-sum="'+k+'"]');if(e)e.textContent=v;}
+  setSum("total",data.length);
+  setSum("linked",data.filter(linked).length);
+  setSum("unlinked",data.filter(function(p){return !linked(p);}).length);
+  setSum("build",data.filter(function(p){return p.status==="build";}).length);
+
+  var chips=document.getElementById("chips");
+  var current="all";
+  [{id:"all",name:"전체"}].concat(CATS).forEach(function(c){
+    var b=el("button","chip",c.name);b.type="button";b.dataset.cat=c.id;
+    var n=c.id==="all"?data.length:data.filter(function(p){return p.cat===c.id;}).length;
+    b.appendChild(el("span","n",String(n)));
+    b.setAttribute("aria-pressed",c.id==="all"?"true":"false");
+    b.addEventListener("click",function(){current=c.id;apply();});
+    chips.appendChild(b);
+  });
+  var only=document.getElementById("onlyLinked");
+  only.addEventListener("change",apply);
+
+  function apply(){
+    var shown=0;
+    chips.querySelectorAll(".chip").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cat===current?"true":"false");});
+    root.querySelectorAll(".group").forEach(function(sec){
+      var inCat=current==="all"||sec.dataset.cat===current;
+      var vis=0;
+      sec.querySelectorAll(".card").forEach(function(c){
+        var ok=inCat&&(!only.checked||c.dataset.linked==="1");
+        c.hidden=!ok;if(ok)vis++;
+      });
+      sec.hidden=vis===0;
+      var cnt=sec.querySelector(".gcount");
+      cnt.textContent=(vis===Number(cnt.dataset.total))?vis+"개":vis+" / "+cnt.dataset.total+"개";
+      shown+=vis;
+    });
+    document.getElementById("shown").textContent=shown+"개 표시";
+  }
+  apply();
+})();
+</script>
+</body>
+</html>

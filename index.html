@@ -159,6 +159,12 @@
   .wrow:first-child{border-top:none}
   .wname{font-weight:700;font-size:1.08rem;letter-spacing:-.01em;min-width:148px}
   .wname .wrepo{display:block;font-family:var(--mono);font-size:.7rem;color:var(--slate);font-weight:400;margin-top:3px}
+  .wname a{transition:color .2s}
+  .wname a:hover{color:var(--teal)}
+  #work .cta-row{margin-top:34px}
+  @media(min-width:721px){#work .wrow{grid-template-columns:210px 1fr auto}#work .wname{min-width:0}}
+  a.stat{display:block;transition:background .2s}
+  a.stat:hover .lab{color:var(--teal)}
   .wdesc{color:var(--ink-soft);font-size:.94rem}
   .wstate{
     font-family:var(--mono);font-size:.68rem;padding:5px 11px;border-radius:999px;
@@ -223,6 +229,7 @@
       <a href="#about">소개</a>
       <a href="#teach">연수</a>
       <a href="#work">작업</a>
+      <a href="projects.html">전체 프로젝트</a>
       <a href="#vision">비전</a>
       <a href="#contact">문의</a>
     </div>
@@ -248,7 +255,7 @@
 <div class="stats">
   <div class="wrap">
     <div class="stat reveal"><div class="num"><em>19</em>년</div><div class="lab">공립 초등교사 경력</div></div>
-    <div class="stat reveal"><div class="num"><em>10</em>+</div><div class="lab">운영·개발 중인 저장소</div></div>
+    <a class="stat reveal" href="projects.html"><div class="num"><em>46</em>개</div><div class="lab">만들어 쓰고 있는 프로젝트 →</div></a>
     <div class="stat reveal"><div class="num">AI 교육 지원단</div><div class="lab">교사 대상 자동화 연수 출강</div></div>
   </div>
 </div>
@@ -311,29 +318,42 @@
     <div class="sec-head reveal">
       <span class="eyebrow">selected work</span>
       <h2 class="sec-title">주요 프로젝트</h2>
-      <p class="sec-lead">구상이 아니라 실제로 배포·운영 중이거나 개발 단계에 있는 작업입니다.</p>
+      <p class="sec-lead">구상이 아니라 실제로 배포해 쓰고 있는 대표작입니다. 지금까지 만든 46개 전체는 따로 모아 두었습니다.</p>
     </div>
     <div class="work">
       <div class="wrow reveal">
-        <div class="wname">딸깍 클래스<span class="wrepo">class-all</span></div>
-        <div class="wdesc">시드(교실 경제) 기반 초등 담임 업무 통합 플랫폼. 흩어진 학급 기능을 하나의 허브로 모읍니다.</div>
-        <div class="wstate s-build">building</div>
-      </div>
-      <div class="wrow reveal">
-        <div class="wname">짬짬이 교실<span class="wrepo">jjam · jjamjjami-gyosil</span></div>
-        <div class="wdesc">전자칠판용 자투리 미니게임 모음. 오프라인 PWA와 대화면 UI로 교실에서 바로 활용. GitHub Pages 배포·운영 중.</div>
+        <div class="wname"><a href="https://shway81-droid.github.io/jjam-classroom/" target="_blank" rel="noopener">짬짬이 교실 <span class="arrow">↗</span></a><span class="wrepo">jjam-classroom 외 가족 사이트</span></div>
+        <div class="wdesc">전자칠판용 자투리 활동 가족 사이트 8곳. 게임 105종·퀴즈 101종·영상 504편·낱말 1,944문항·1분사회 284차시 등을 설치·로그인 없이 교실에서 바로 씁니다.</div>
         <div class="wstate s-run">running</div>
       </div>
       <div class="wrow reveal">
-        <div class="wname">한능검 데이터<span class="wrepo">koreanexam</span></div>
-        <div class="wdesc">650문항을 vision 파이프라인으로 분할·추출·재태깅. 정답을 문서로 고정해 품질을 관리.</div>
-        <div class="wstate s-build">building</div>
+        <div class="wname">기록쌤<span class="wrepo">girok · 초대코드 배포</span></div>
+        <div class="wdesc">번호와 칩으로 적은 메모를 객관적인 누가기록으로 바꾸고, 상담자료·민원 대응·생활지도를 돕는 학생 행동기록 웹앱.</div>
+        <div class="wstate s-run">running</div>
       </div>
       <div class="wrow reveal">
-        <div class="wname">서식 채우기 플러그인<span class="wrepo">hwpx-form-filler-plugin</span></div>
-        <div class="wdesc">작년 HWPX 공문을 서식으로 삼아 올해 초안을 자동 생성하는 Claude Code 플러그인.</div>
-        <div class="wstate s-build">building</div>
+        <div class="wname">우선순위 한국사<span class="wrepo">koreanexam · 승인제</span></div>
+        <div class="wdesc">한능검 기출 1,850문항을 키워드로 전부 태깅해 교재·전자책·강의자료·학습 웹앱으로. 교사 약 78명이 쓰고 있습니다.</div>
+        <div class="wstate s-run">running</div>
       </div>
+      <div class="wrow reveal">
+        <div class="wname"><a href="https://github.com/shway81-droid/lesson-kit" target="_blank" rel="noopener">lesson-kit <span class="arrow">↗</span></a><span class="wrepo">공개 스킬 · MIT</span></div>
+        <div class="wdesc">교과서 한 차시를 넣으면 동기유발 영상·수업 슬라이드·형성평가·개념정리를 만드는 Claude Code 스킬.</div>
+        <div class="wstate s-run">running</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname"><a href="https://github.com/shway81-droid/lecture-deck" target="_blank" rel="noopener">lecture-deck <span class="arrow">↗</span></a><span class="wrepo">공개 스킬</span></div>
+        <div class="wdesc">주제 하나로 강의 덱·강사 대본·오프라인 배포본·편집 가능한 PPTX까지 만드는 스킬. 교사·학부모 강의 덱 65개를 이 방식으로 만들었습니다.</div>
+        <div class="wstate s-run">running</div>
+      </div>
+      <div class="wrow reveal">
+        <div class="wname"><a href="https://github.com/shway81-droid/upmu-pahak" target="_blank" rel="noopener">업무 길잡이 <span class="arrow">↗</span></a><span class="wrepo">upmu-pahak · 공개 스킬 · MIT</span></div>
+        <div class="wdesc">에듀파인 1년치 기안 공문과 업무분장표로 업무별 1년 흐름과 핵심 문서를 HTML 한 장에 정리하는 Claude 스킬.</div>
+        <div class="wstate s-run">running</div>
+      </div>
+    </div>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="projects.html">전체 프로젝트 46개 보기 <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -343,7 +363,7 @@
     <span class="eyebrow">where this goes</span>
     <p class="vision-quote">교사의 업무를 입력하면,<br><span class="hl">프로그램이 만들어지는</span> 시스템으로.</p>
     <div class="road">
-      <div class="rstep reveal"><div class="rk">~2026 · 통합</div><div class="rt">단발 앱을 허브로</div><div class="rd">흩어진 도구를 딸깍 클래스로 수렴하고 자동화 패턴을 템플릿화.</div></div>
+      <div class="rstep reveal"><div class="rk">~2026 · 통합</div><div class="rt">단발 앱을 허브로</div><div class="rd">흩어진 도구를 짬짬이 모노레포와 공개 스킬로 묶고 자동화 패턴을 템플릿화.</div></div>
       <div class="rstep reveal"><div class="rk">2027–28 · 자산화</div><div class="rt">스킬·플러그인 라이브러리</div><div class="rd">반복 패턴을 자산으로 쌓고, 요구→코드 초안 메타 하네스 MVP 가동.</div></div>
       <div class="rstep reveal"><div class="rk">2029–30 · 확산</div><div class="rt">전국 교사에게로</div><div class="rd">검증된 도구를 연수·오픈소스로 확산. 나의 자동화가 남의 자동화로 복제될 것.</div></div>
     </div>
