@@ -149,6 +149,34 @@
   .tcard h3{font-size:1.06rem;font-weight:700;letter-spacing:-.01em}
   .tcard p{margin-top:8px;font-size:.9rem;color:var(--slate);line-height:1.55}
   @media(max-width:720px){.teach-grid{grid-template-columns:1fr}}
+  .principle{margin-top:22px;font-size:.92rem;color:var(--ink-soft);border-left:2px solid var(--teal);padding-left:16px;max-width:62ch}
+
+  /* courses */
+  .sub-head{margin-top:64px;font-size:1.18rem;font-weight:800;letter-spacing:-.02em}
+  .sub-lead{margin-top:8px;color:var(--slate);font-size:.94rem;max-width:58ch}
+  .courses{margin-top:20px;display:flex;flex-direction:column}
+  .course{display:grid;grid-template-columns:290px 1fr;gap:40px;padding:28px 0;border-top:1px solid var(--hair)}
+  .course .ck{font-family:var(--mono);font-size:.72rem;color:var(--teal);margin-bottom:8px}
+  .course h4{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+  .course .cwho{margin-top:8px;font-size:.88rem;color:var(--slate);line-height:1.55}
+  .course .clink{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px}
+  .course .clink a{font-size:.86rem;font-weight:600;color:var(--teal-deep);border-bottom:1px solid rgba(14,124,123,.35);padding-bottom:1px;transition:color .2s,border-color .2s}
+  .course .clink a:hover{color:var(--ink);border-color:var(--ink)}
+  .days{display:grid;grid-template-columns:auto 1fr;gap:11px 20px;align-content:start;font-size:.93rem}
+  .days dt{font-family:var(--mono);font-size:.74rem;color:var(--slate);padding-top:3px;white-space:nowrap}
+  .days dd{color:var(--ink-soft)}
+  @media(max-width:720px){.course{grid-template-columns:1fr;gap:18px}}
+
+  /* record */
+  .rec-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px}
+  .rec h3{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+  .rec ul{list-style:none}
+  .rec li{display:grid;grid-template-columns:86px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--hair)}
+  .rec .rwhen{font-family:var(--mono);font-size:.74rem;color:var(--teal);padding-top:3px}
+  .rec .rwhat{font-weight:700;font-size:.97rem;line-height:1.45;letter-spacing:-.01em}
+  .rec .rwhere{font-size:.86rem;color:var(--slate);margin-top:3px}
+  @media(max-width:720px){.rec-grid{grid-template-columns:1fr;gap:44px}}
+  .principle,.sub-lead,.course .cwho,.days dd,.rec .rwhat,.rec .rwhere{word-break:keep-all}
 
   /* work list */
   .work{display:flex;flex-direction:column;gap:0}
@@ -228,6 +256,7 @@
     <div class="navlinks">
       <a href="#about">소개</a>
       <a href="#teach">연수</a>
+      <a href="#record">이력</a>
       <a href="#work">작업</a>
       <a href="projects.html">전체 프로젝트</a>
       <a href="#vision">비전</a>
@@ -243,7 +272,7 @@
     <p class="hero-sub reveal">반복되는 행정 업무를 AI와 코드로 자동화해,<br>그 시간을 학생 관찰과 수업으로 되돌립니다.<br>제가 직접 만들어 쓰고,<br>교사에게 그 방법을 가르칩니다.</p>
     <div class="hero-id reveal">
       <span class="name">송화영 (Shway Song)</span>
-      <span class="role">19년차 공립 초등교사 · 5학년 담임 / 인성부장</span>
+      <span class="role">19년차 공립 초등교사 · 5·6학년 복식학급 담임</span>
     </div>
     <div class="cta-row reveal">
       <a class="btn btn-primary" href="#teach">연수 살펴보기 <span class="arrow">→</span></a>
@@ -255,7 +284,7 @@
 <div class="stats">
   <div class="wrap">
     <div class="stat reveal"><div class="num"><em>19</em>년</div><div class="lab">공립 초등교사 경력</div></div>
-    <a class="stat reveal" href="projects.html"><div class="num"><em>46</em>개</div><div class="lab">만들어 쓰고 있는 프로젝트 →</div></a>
+    <a class="stat reveal" href="projects.html"><div class="num"><em>49</em>개</div><div class="lab">만들어 쓰고 있는 프로젝트 →</div></a>
     <div class="stat reveal"><div class="num">AI 교육 지원단</div><div class="lab">교사 대상 자동화 연수 출강</div></div>
   </div>
 </div>
@@ -274,7 +303,7 @@
       </div>
       <div class="flow reveal">
         <div class="flow-step"><div class="fk">step.01</div><div class="ft">단발 자동화</div><div class="fd">개별 업무를 하나씩 스크립트로</div></div>
-        <div class="flow-step now"><div class="fk">step.02 · now</div><div class="ft">통합 허브</div><div class="fd">담임·부장 업무를 플랫폼으로 수렴</div></div>
+        <div class="flow-step now"><div class="fk">step.02 · now</div><div class="ft">통합 허브</div><div class="fd">담임·학교 업무를 플랫폼으로 수렴</div></div>
         <div class="flow-step"><div class="fk">step.03</div><div class="ft">메타 하네스</div><div class="fd">요구 → PRD → 코드 → 배포 자동 생성</div></div>
       </div>
     </div>
@@ -297,7 +326,7 @@
       <div class="tcard reveal">
         <div class="tnum">02</div>
         <h3>업무 자동화</h3>
-        <p>폴더 정리, PPT 제작, 작년 문서를 참조한 올해 문서 자동 작성 등 반복 업무를 줄이는 실전 자동화.</p>
+        <p>체험학습 계획서·가정통신문·결과보고, 작년 양식으로 올해 공문 초안 쓰기처럼 매년 겪는 업무 하나를 처음부터 끝까지 자동화합니다.</p>
       </div>
       <div class="tcard reveal">
         <div class="tnum">03</div>
@@ -310,6 +339,88 @@
         <p>HWP/HWPX 구조를 다뤄 공문·기안을 자동 갱신하고, LaTeX로 정교한 학습지를 프로그램 방식으로 생성합니다.</p>
       </div>
     </div>
+    <p class="principle reveal">실습은 모두 가상 데이터로 하고, 보내기·지우기 같은 마지막 단계는 사람이 승인하는 안전 원칙을 함께 가르칩니다.</p>
+
+    <h3 class="sub-head reveal">직접 설계한 강의 과정</h3>
+    <p class="sub-lead reveal">차시당 50분이고, 차시마다 결과물 하나를 직접 만들어 가져갑니다.</p>
+    <div class="courses">
+      <div class="course reveal">
+        <div>
+          <div class="ck">교사 · 5일 15차시</div>
+          <h4>교사 업무·수업 자동화</h4>
+          <p class="cwho">Claude를 처음 쓰는 교사가 대상입니다. 제가 만들어 쓰는 도구 가운데 업무·수업 15가지를 쉬운 것부터 차례로 직접 만듭니다.</p>
+          <div class="clink"><a href="https://shway81-droid.github.io/teacher-day1/" target="_blank" rel="noopener">1일차 따라 하기 <span class="arrow">↗</span></a></div>
+        </div>
+        <dl class="days">
+          <dt>1일차</dt><dd>체험학습 사진 안내 페이지 · 교과서 차시 자료 · 작년 공문으로 올해 초안</dd>
+          <dt>2일차</dt><dd>학교 아침 브리핑 · 업무 길잡이 알림 · 오늘의 우리말 카드</dd>
+          <dt>3일차</dt><dd>반 대항 퀴즈 웹앱 · 따라 쓰기 학습지 · 10초 관찰 메모장</dd>
+          <dt>4일차</dt><dd>우리 반 미션 앱 · AI 브라우저로 문서 일괄 저장 · 1분 수업 영상</dd>
+          <dt>5일차</dt><dd>기록쌤 · lesson-kit · 짬짬이 모아보기 설계와 수료</dd>
+        </dl>
+      </div>
+      <div class="course reveal">
+        <div>
+          <div class="ck">학부모·일반인 · 2일 6차시</div>
+          <h4>바이브 코딩</h4>
+          <p class="cwho">Claude를 처음 써 보는 학부모·일반인이 대상입니다. 첫날은 말로 앱을 만들고, 둘째 날은 내 주소로 올려 휴대폰에서 씁니다.</p>
+          <div class="clink"><a href="https://shway81-droid.github.io/education1/" target="_blank" rel="noopener">1일차 따라 하기 <span class="arrow">↗</span></a></div>
+        </div>
+        <dl class="days">
+          <dt>1일차</dt><dd>모임 정산 계산기 · 가족 앨범 웹페이지 · 기록이 남는 가계부 앱</dd>
+          <dt>2일차</dt><dd>내 주소로 올리기 · 휴대폰 홈 화면 앱 · 내 아이디어로 나만의 앱</dd>
+        </dl>
+      </div>
+      <div class="course reveal">
+        <div>
+          <div class="ck">일반인 · 5일 15차시</div>
+          <h4>생활 자동화</h4>
+          <p class="cwho">Claude를 처음 쓰는 일반인이 대상입니다. 사진·가계·건강·알림처럼 내 생활의 반복을 하나씩 자동화합니다.</p>
+          <div class="clink">
+            <a href="https://shway81-droid.github.io/claude-day1/" target="_blank" rel="noopener">1일차 따라 하기 <span class="arrow">↗</span></a>
+            <a href="https://shway81-droid.github.io/claude-day2/" target="_blank" rel="noopener">2일차 따라 하기 <span class="arrow">↗</span></a>
+          </div>
+        </div>
+        <dl class="days">
+          <dt>1일차</dt><dd>가족 사진 앨범 · 영수증 정산표 · 내 글로 발표 슬라이드</dd>
+          <dt>2일차</dt><dd>아침 카톡 브리핑 · 말로 쌓는 건강 기록 · 메일을 정리하는 나의 비서</dd>
+          <dt>3일차</dt><dd>재무 대시보드 · 휴대폰 가계부 앱 · 체중 기록 페이지</dd>
+          <dt>4일차</dt><dd>가족 과제 앱 · 텔레그램 뉴스봇 · 실거래가 알림봇</dd>
+          <dt>5일차</dt><dd>통합 생활 비서 · 자산 리포트 · 가족 사진 아카이브 설계와 수료</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="record">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">record</span>
+      <h2 class="sec-title">강의 이력과 선정 실적</h2>
+      <p class="sec-lead">직접 만들어 쓰며 검증한 방법을 교사와 학부모 앞에서 가르쳐 왔습니다.</p>
+    </div>
+    <div class="rec-grid">
+      <div class="rec reveal">
+        <h3>강의·출강</h3>
+        <ul>
+          <li><span class="rwhen">2026.12 예정</span><div><div class="rwhat">「가족과 함께하는 AI·SW 체험 프로그램」 강사단 출강</div><div class="rwhere">무안AI·SW교육체험센터</div></div></li>
+          <li><span class="rwhen">2026</span><div><div class="rwhat">학부모 대상 바이브코딩 교육</div><div class="rwhere">무안 AI 교육 지원단</div></div></li>
+          <li><span class="rwhen">2026.5~6</span><div><div class="rwhat">「클로드 코워크로 수업·업무 자동화」</div><div class="rwhere">지식샘터 · 교사 원격 연수</div></div></li>
+          <li><span class="rwhen">2026.1</span><div><div class="rwhat">「AI SW 정보 역량강화 연수(바이브코딩-고급)」 강사</div><div class="rwhere">세종특별자치시교육청</div></div></li>
+          <li><span class="rwhen">2026.1</span><div><div class="rwhat">「바이브코딩 기초」</div><div class="rwhere">지식샘터</div></div></li>
+        </ul>
+      </div>
+      <div class="rec reveal">
+        <h3>선정·입상·자격</h3>
+        <ul>
+          <li><span class="rwhen">선정</span><div><div class="rwhat">「2026 초등 AI수업도구 제안전」 선정작</div><div class="rwhere">합주 디딤돌 · 2026.11</div></div></li>
+          <li><span class="rwhen">선정</span><div><div class="rwhat">「2026 AI·디지털 기반 교육혁신 교원 해커톤」 참여자</div><div class="rwhere">바이브코딩 부문</div></div></li>
+          <li><span class="rwhen">입상</span><div><div class="rwhat">다했니 연구대회 입상</div><div class="rwhere">바이브코딩 부문</div></div></li>
+          <li><span class="rwhen">자격</span><div><div class="rwhat">COS Pro 파이썬</div><div class="rwhere">코딩 활용능력 자격</div></div></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -318,9 +429,14 @@
     <div class="sec-head reveal">
       <span class="eyebrow">selected work</span>
       <h2 class="sec-title">주요 프로젝트</h2>
-      <p class="sec-lead">구상이 아니라 실제로 배포해 쓰고 있는 대표작입니다. 지금까지 만든 46개 전체는 따로 모아 두었습니다.</p>
+      <p class="sec-lead">구상이 아니라 실제로 배포해 쓰고 있는 대표작입니다. 지금까지 만든 49개 전체는 따로 모아 두었습니다.</p>
     </div>
     <div class="work">
+      <div class="wrow reveal">
+        <div class="wname">합주 디딤돌<span class="wrepo">제안전 선정작 · 웹앱</span></div>
+        <div class="wdesc">학생 태블릿으로 파트를 나눠 함께 연주하는 기악합주 수업 도구. 교과서 합주곡 12곡을 설치·로그인 없이 엽니다. 「2026 초등 AI수업도구 제안전」 선정작입니다.</div>
+        <div class="wstate s-run">running</div>
+      </div>
       <div class="wrow reveal">
         <div class="wname"><a href="https://shway81-droid.github.io/jjam-classroom/" target="_blank" rel="noopener">짬짬이 교실 <span class="arrow">↗</span></a><span class="wrepo">jjam-classroom 외 가족 사이트</span></div>
         <div class="wdesc">전자칠판용 자투리 활동 가족 사이트 8곳. 게임 105종·퀴즈 101종·영상 504편·낱말 1,944문항·1분사회 284차시 등을 설치·로그인 없이 교실에서 바로 씁니다.</div>
@@ -343,7 +459,7 @@
       </div>
       <div class="wrow reveal">
         <div class="wname"><a href="https://github.com/shway81-droid/lecture-deck" target="_blank" rel="noopener">lecture-deck <span class="arrow">↗</span></a><span class="wrepo">공개 스킬</span></div>
-        <div class="wdesc">주제 하나로 강의 덱·강사 대본·오프라인 배포본·편집 가능한 PPTX까지 만드는 스킬. 교사·학부모 강의 덱 65개를 이 방식으로 만들었습니다.</div>
+        <div class="wdesc">주제 하나로 강의 덱·강사 대본·오프라인 배포본·편집 가능한 PPTX까지 만드는 스킬. 교사·학부모 강의 덱 80여 개를 이 방식으로 만들었습니다.</div>
         <div class="wstate s-run">running</div>
       </div>
       <div class="wrow reveal">
@@ -353,7 +469,7 @@
       </div>
     </div>
     <div class="cta-row reveal">
-      <a class="btn btn-primary" href="projects.html">전체 프로젝트 46개 보기 <span class="arrow">→</span></a>
+      <a class="btn btn-primary" href="projects.html">전체 프로젝트 49개 보기 <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
